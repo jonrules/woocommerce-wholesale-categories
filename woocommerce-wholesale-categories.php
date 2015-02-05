@@ -143,7 +143,11 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 		if ( empty( $user ) ) {
 			return false;
 		}
-		return in_array( 'wholesaler', (array) $user->roles );
+		return ( 
+			in_array( 'wholesaler', (array) $user->roles )
+				|| in_array( 'shop_manager', (array) $user->roles )
+				|| user_can( $user_id, 'manage_options' )
+		);
 	}
 	
 }
